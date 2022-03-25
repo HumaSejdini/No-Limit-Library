@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name="shop_user")
-@NoArgsConstructor
 public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,5 +38,6 @@ public class User{
         this.name = name;
         this.surname = surname;
     }
+    public User(){}
 
 }
