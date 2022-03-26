@@ -25,8 +25,9 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item findById(Long id) {
-        return this.itemRepository.findById(id).orElseThrow(InvalidItemIdException::new);
+    public Optional<Item> findById(Long id) {
+        return this.itemRepository.findById(id);
+        //.orElseThrow(InvalidItemIdException::new) without Optional<>
     }
 
     @Override
@@ -45,13 +46,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Optional<Item> save(Double price, String title, Integer quantity, String imglink, Category category, Long publisherId) {
+    public Optional<Item> save(Double price, String title,String description ,Integer quantity, String imglink, Category category, Long publisherId) {
         Publisher publisher=this.publisherRepository.findById(publisherId).orElseThrow(()-> new PublisherIdNotFoundException(publisherId));
-        return Optional.of(this.itemRepository.save(new Item(price,title,quantity,imglink,category,publisher)));
+        return Optional.of(this.itemRepository.save(new Item(price,title,description,quantity,imglink,category,publisher)));
     }
 
     @Override
-    public Optional<Item> update(Long id, Double price, String title, Integer quantity, String imglink, Category category, Publisher publisher) {
+    public Optional<Item> update(Long id, Double price, String title,String description , Integer quantity, String imglink, Category category, Publisher publisher) {
         return Optional.empty();
     }
 }

@@ -20,6 +20,8 @@ public class Item {
 
     private String title;
 
+    private String description;
+
     private Integer quantity;
 
     @Column(columnDefinition="text",length = 1000)
@@ -34,17 +36,19 @@ public class Item {
     @ManyToMany
     private List<Author> author;
 
-    public Item(Double price, String title, Integer quantity, String imglink, Category category) {
+    public Item(Double price, String title,String description, Integer quantity, String imglink, Category category) {
         this.price = price;
         this.title = title;
+        this.description=description;
         this.quantity = quantity;
         this.imglink = imglink;
         this.category = category;
     }
 
-    public Item(Double price, String title, Integer quantity, String imglink, Category category, Publisher publisher) {
+    public Item(Double price, String title,String description, Integer quantity, String imglink, Category category, Publisher publisher) {
         this.price = price;
         this.title = title;
+        this.description=description;
         this.quantity = quantity;
         this.imglink = imglink;
         this.category = category;
@@ -105,5 +109,21 @@ public class Item {
 
     public void setAuthor(List<Author> author) {
         this.author = author;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

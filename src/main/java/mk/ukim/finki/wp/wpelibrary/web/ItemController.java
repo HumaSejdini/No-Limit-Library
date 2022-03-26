@@ -7,9 +7,7 @@ import mk.ukim.finki.wp.wpelibrary.service.ItemService;
 import mk.ukim.finki.wp.wpelibrary.service.PublisherService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,6 +36,11 @@ public class ItemController {
         model.addAttribute("items",items);
         model.addAttribute("authors",authors);
         return "index.html";
+    }
+    @DeleteMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable Long id){
+        this.itemService.deleteById(id);
+        return "redirect:/item";
     }
 
 }
