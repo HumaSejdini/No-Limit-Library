@@ -1,6 +1,9 @@
 package mk.ukim.finki.wp.wpelibrary.service.impl;
 
 import mk.ukim.finki.wp.wpelibrary.model.Author;
+import mk.ukim.finki.wp.wpelibrary.model.Item;
+import mk.ukim.finki.wp.wpelibrary.model.exception.InvalidAuthorIdException;
+import mk.ukim.finki.wp.wpelibrary.model.exception.InvalidItemIdException;
 import mk.ukim.finki.wp.wpelibrary.repository.AuthorRepository;
 import mk.ukim.finki.wp.wpelibrary.service.AuthorService;
 import org.springframework.stereotype.Service;
@@ -38,14 +41,16 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Author update(String name, String surname, String country) {
-        if(name==null || name.isEmpty())
-        {
-            throw new IllegalArgumentException();
-        }
-        Author a=new Author(name, surname,country);
-        authorRepository.save(a);
-        return a;
+    public Author update(Long id,String name, String surname, String country) {
+//        if(name==null || name.isEmpty())
+//        {
+//            throw new IllegalArgumentException();
+//        }
+        Author a=this.findById(id).orElseThrow(InvalidAuthorIdException::new);
+        a.setName(name);
+        a.setSurname(surname);
+        a.setCountry(country);
+        return this.authorRepository.save(a);
     }
 
     @Override

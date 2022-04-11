@@ -10,6 +10,7 @@ import mk.ukim.finki.wp.wpelibrary.repository.PublisherRepository;
 import mk.ukim.finki.wp.wpelibrary.service.ItemService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,13 +47,23 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Transactional
     public Optional<Item> save(Double price, String title,String description ,Integer quantity, String imglink, Category category, Long publisherId) {
         Publisher publisher=this.publisherRepository.findById(publisherId).orElseThrow(()-> new PublisherIdNotFoundException(publisherId));
+        this.itemRepository.deleteByTitle(title);
         return Optional.of(this.itemRepository.save(new Item(price,title,description,quantity,imglink,category,publisher)));
     }
 
     @Override
     public Optional<Item> update(Long id, Double price, String title,String description , Integer quantity, String imglink, Category category, Publisher publisher) {
-        return Optional.empty();
+        Item item=this.findById(id).orElseThrow(InvalidItemIdException::new);
+        item.setPrice(price);
+        item.setTitle(title);
+        item.setDescription(description);
+        item.setQuantity(quantity);
+        item.setImglink(imglink);
+        item.setCategory(category);
+        item.setPublisher(publisher);
+        return Optional.of(this.itemRepository.save(item));
     }
 }

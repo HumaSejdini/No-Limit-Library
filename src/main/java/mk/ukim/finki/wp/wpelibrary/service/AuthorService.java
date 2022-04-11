@@ -9,6 +9,6 @@ public interface AuthorService {
     Optional<Author> findById(Long id);
     List<Author> listAll();
     Author create(String name, String surname, String country);
-    Author update(String name,String surname,String country);
+    Author update(Long id,String name,String surname,String country);
     void deleteById(Long id);
 }
