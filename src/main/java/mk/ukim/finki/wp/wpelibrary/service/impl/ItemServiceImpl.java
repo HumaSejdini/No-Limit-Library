@@ -9,8 +9,9 @@ import mk.ukim.finki.wp.wpelibrary.repository.ItemRepository;
 import mk.ukim.finki.wp.wpelibrary.repository.PublisherRepository;
 import mk.ukim.finki.wp.wpelibrary.service.ItemService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +56,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Transactional
     public Optional<Item> update(Long id, Double price, String title,String description , Integer quantity, String imglink, Category category, Publisher publisher) {
         Item item=this.findById(id).orElseThrow(InvalidItemIdException::new);
         item.setPrice(price);

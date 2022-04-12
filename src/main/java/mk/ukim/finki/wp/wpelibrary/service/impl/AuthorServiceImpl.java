@@ -7,6 +7,8 @@ import mk.ukim.finki.wp.wpelibrary.model.exception.InvalidItemIdException;
 import mk.ukim.finki.wp.wpelibrary.repository.AuthorRepository;
 import mk.ukim.finki.wp.wpelibrary.service.AuthorService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -30,17 +32,20 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    @Transactional
     public Author create(String name, String surname, String country) {
         if(name==null || name.isEmpty())
         {
             throw new IllegalArgumentException();
         }
+        this.authorRepository.deleteByName(name);
         Author a=new Author(name, surname,country);
         authorRepository.save(a);
         return a;
     }
 
     @Override
+    @Transactional
     public Author update(Long id,String name, String surname, String country) {
 //        if(name==null || name.isEmpty())
 //        {
