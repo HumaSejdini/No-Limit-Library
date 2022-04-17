@@ -13,6 +13,4 @@ public interface ShoppingCartService {
     //ona koshnicka koja sto vo momentot e aktivna
     ShoppingCart getActiveShoppingCart(String username);
     ShoppingCart addItemToShoppingCart(String username, Long productId);
-
-
 }

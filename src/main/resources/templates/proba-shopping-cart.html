@@ -11374,6 +11374,7 @@
                             <th scope="col">Item name</th>
                             <th scope="col">Price</th>
                             <th scope="col">Publisher</th>
+                            <th scope="col">Quantity</th>
                             <!--                            <th scope="col">Category</th>-->
                         </tr>
                         </thead>
@@ -11384,6 +11385,7 @@
                             <td th:text="${item.getPublisher() != null}
                             ? ${item.getPublisher().getName()} : 'No Manufacturer'"></td>
                             <!--                            <td th:text="${item.getCategory().toString().equals(type.toString()) : 'null'}"></td>-->
+                            <td th:text="${item.getQuantity()}" ></td>
                         </tr>
                         </tbody>
                     </table>
