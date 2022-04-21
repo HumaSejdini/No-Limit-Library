@@ -36,6 +36,9 @@ public class Item {
     @ManyToMany
     private List<Author> author;
 
+    @ManyToMany(mappedBy = "items")
+    private List<ShoppingCart> carts;
+
     public Item(Double price, String title,String description, Integer quantity, String imglink, Category category) {
         this.price = price;
         this.title = title;

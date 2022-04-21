@@ -23,8 +23,9 @@ public class LoginController {
     @GetMapping
     //@RequestMapping(method = RequestMethod.GET,value="keto mapping"),monet ene me ket te punoje
     //ne vend doGet-->getLoginPage
-    public String getLoginPage(){
-        return "login";
+    public String getLoginPage(Model model){
+        model.addAttribute("bodyContent","login");
+        return "master-template";
     }
     @PostMapping
     public String login(HttpServletRequest request, Model model){

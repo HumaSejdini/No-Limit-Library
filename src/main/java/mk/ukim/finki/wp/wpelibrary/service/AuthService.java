@@ -1,8 +1,10 @@
 package mk.ukim.finki.wp.wpelibrary.service;
 
 import mk.ukim.finki.wp.wpelibrary.model.User;
+import org.springframework.security.core.userdetails.UserDetails;
+
 
 public interface AuthService {
     User login(String username, String password);
-    User register(String username,String password,String repeatPassword,String name,String surname,String email);
+
 }

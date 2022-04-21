@@ -29,7 +29,8 @@ public class AuthorController {
         }
         List<Author> authors=this.authorService.listAll();
         model.addAttribute("authors",authors);
-        return "list-authors.html";
+        model.addAttribute("bodyContent","list-authors");
+        return "master-template";
     }
     @DeleteMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Long id){
@@ -74,7 +75,8 @@ public class AuthorController {
     public String showCreateForm(Model model) {
         List<Author> authors=this.authorService.listAll();
         model.addAttribute("authors",authors);
-        return "add-author";
+        model.addAttribute("bodyContent","add-author");
+        return "master-template";
     }
 
     @PostMapping("/add-author")
@@ -89,7 +91,8 @@ public class AuthorController {
         if(this.authorService.findById(id).isPresent()){
             Author author = this.authorService.findById(id).get();
             model.addAttribute("author",author);
-            return "add-author";
+            model.addAttribute("bodyContent","add-author");
+            return "master-template";
         }
         return "redirect:/author/?error=ItemNotFound";//authronotfound
     }

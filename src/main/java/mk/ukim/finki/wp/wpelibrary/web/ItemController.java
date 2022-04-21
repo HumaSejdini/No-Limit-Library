@@ -38,7 +38,8 @@ public class ItemController {
         List<Author> authors=this.authorService.listAll();
         model.addAttribute("items",items);
         model.addAttribute("authors",authors);
-        return "index.html";
+        model.addAttribute("bodyContent","index");
+        return "master-template";
     }
     @DeleteMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Long id){
@@ -54,8 +55,9 @@ public class ItemController {
 //        model.addAttribute("authors",authors);
         model.addAttribute("publishers",publishers);
         model.addAttribute("categories",categories);
+        model.addAttribute("bodyContent","proba-add-item");
 //        model.addAttribute("items",items);
-        return "proba-add-item";
+        return "master-template";
     }
     @GetMapping("/edit-form/{id}")
     public String editItemPage(@PathVariable Long id,Model model){
@@ -68,8 +70,8 @@ public class ItemController {
             model.addAttribute("publishers",publishers);
             model.addAttribute("categories",categories);
             model.addAttribute("item",item);
-            return "proba-add-item";
-        }
+            model.addAttribute("bodyContent","proba-add-item");
+            return "master-template";        }
         return "redirect:/item/?error=ItemNotFound";
     }
 
@@ -98,5 +100,15 @@ public class ItemController {
                          @RequestParam Publisher publisherId) { //kto long
         this.itemService.update(id, price,title,description,quantity,imglink,category,publisherId);
         return "redirect:/item";
+    }
+    @GetMapping("/search")
+    public String home(Item item, Model model, String title) {
+        if(title!=null) {
+            List<Item> list = itemService.search(title);
+            model.addAttribute("list", list);
+        }else {
+            List<Item> list = itemService.findAll();
+            model.addAttribute("list", list);}
+        return "index";
     }
 }

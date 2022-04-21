@@ -68,4 +68,9 @@ public class ItemServiceImpl implements ItemService {
         item.setPublisher(publisher);
         return Optional.of(this.itemRepository.save(item));
     }
+
+    @Override
+    public List<Item> search(String title) {
+        return itemRepository.findAllByTitleLike(title);
+    }
 }

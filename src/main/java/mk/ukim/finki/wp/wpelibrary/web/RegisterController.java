@@ -3,6 +3,7 @@ package mk.ukim.finki.wp.wpelibrary.web;
 import mk.ukim.finki.wp.wpelibrary.model.exception.InvalidArgumentException;
 import mk.ukim.finki.wp.wpelibrary.model.exception.PasswordsDoNotMatchException;
 import mk.ukim.finki.wp.wpelibrary.service.AuthService;
+import mk.ukim.finki.wp.wpelibrary.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,15 +11,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import mk.ukim.finki.wp.wpelibrary.model.enumerations.Role;
+
+
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
 
     private final AuthService authService;
+    private final UserService userService;
 
-
-    public RegisterController(AuthService authService){
+    public RegisterController(AuthService authService, UserService userService){
         this.authService=authService;
+        this.userService = userService;
     }
     @GetMapping
     public String getRegisterPage(@RequestParam(required = false) String error, Model model){
@@ -26,7 +31,8 @@ public class RegisterController {
             model.addAttribute("hasError",true);
             model.addAttribute("error",error);
         }
-        return "register.html";
+        model.addAttribute("bodyContent","register");
+        return "master-template";
     }
 
     @PostMapping
@@ -35,9 +41,10 @@ public class RegisterController {
                             @RequestParam String repeatPassword,
                             @RequestParam String name,
                             @RequestParam String surname,
-                            @RequestParam String email){
+                            @RequestParam String email,
+                            @RequestParam Role role){
         try{
-            this.authService.register(username, password, repeatPassword, name, surname,email);
+            this.userService.register(username, password, repeatPassword, name, surname,email,role);
             return "redirect:/login";
         }catch(PasswordsDoNotMatchException | InvalidArgumentException exception){
             return "redirect:/register?error="+exception.getMessage();

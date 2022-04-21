@@ -1,15 +1,13 @@
 package mk.ukim.finki.wp.wpelibrary.web;
 
 import mk.ukim.finki.wp.wpelibrary.model.Author;
+import mk.ukim.finki.wp.wpelibrary.model.Form;
 import mk.ukim.finki.wp.wpelibrary.model.Item;
 import mk.ukim.finki.wp.wpelibrary.service.AuthorService;
 import mk.ukim.finki.wp.wpelibrary.service.ItemService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,7 +32,9 @@ public class ViewItemController {
         List<Author> authors = this.authorService.listAll();
         model.addAttribute("items", items);
         model.addAttribute("authors", authors);
-        return "view-item.html";
+        model.addAttribute("form", new Item());
+        model.addAttribute("bodyContent","view-item");
+        return "master-template";
     }
 
     //    @GetMapping("/{id}")
@@ -55,9 +55,15 @@ public class ViewItemController {
             model.addAttribute("items", items);
             model.addAttribute("itemss", itemss);
             model.addAttribute("authors", authors);
-            return "view-item.html";
+            model.addAttribute("bodyContent","view-item");
+            return "master-template";
         }
         return "redirect:/item/?error=itemNotFound";
     }
-
+    @PostMapping
+    public String save(Item form, Model model) {
+        model.addAttribute("form", form);
+        model.addAttribute("bodyContent","proba-shopping-cart");
+        return "master-template";
+    }
 }
