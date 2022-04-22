@@ -14,5 +14,5 @@ public interface ItemService {
     void deleteById(Long id);
     Optional<Item> save(Double price, String title,String description, Integer quantity, String imglink, Category category, Long publisherId);
     Optional<Item> update(Long id,Double price, String title,String description, Integer quantity, String imglink, Category category, Publisher publisher);
-    List<Item> search(String title);
+    List<Item> filter(String title);
 }

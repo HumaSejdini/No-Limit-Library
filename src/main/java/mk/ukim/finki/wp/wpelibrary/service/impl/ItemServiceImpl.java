@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -70,7 +71,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<Item> search(String title) {
-        return itemRepository.findAllByTitleLike(title);
+    public List<Item> filter(String title) {
+        if(title !=null || !title.isEmpty()){
+           return this.itemRepository.findAllByTitle(title);
+        }
+        else
+            return itemRepository.findAll();
     }
 }

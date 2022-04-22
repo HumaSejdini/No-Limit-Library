@@ -30,13 +30,20 @@ public class ItemController {
     }
 
     @GetMapping
-    public String getProductPage(@RequestParam(required = false) String error, Model model){
+    public String getProductPage(@RequestParam(required = false) String error,
+                                 @RequestParam(required = false) String title,
+                                 Model model){
         if(error!=null && !error.isEmpty()){
             model.addAttribute("hasError",true);
             model.addAttribute("error",error);
         }
         List<Item> items=this.itemService.findAll();
         List<Author> authors=this.authorService.listAll();
+        if(title==null || title.isEmpty()){
+            items=this.itemService.findAll();
+        }else{
+            items=this.itemService.filter(title);
+        }
         model.addAttribute("items",items);
         model.addAttribute("authors",authors);
         model.addAttribute("bodyContent","index");
@@ -104,14 +111,14 @@ public class ItemController {
         this.itemService.update(id, price,title,description,quantity,imglink,category,publisherId);
         return "redirect:/item";
     }
-    @GetMapping("/search")
-    public String home(Item item, Model model, String title) {
-        if(title!=null) {
-            List<Item> list = itemService.search(title);
-            model.addAttribute("list", list);
-        }else {
-            List<Item> list = itemService.findAll();
-            model.addAttribute("list", list);}
-        return "index";
-    }
+//    @GetMapping("/search")
+//    public String home(Item item, Model model, String title) {
+//        if(title!=null) {
+//            List<Item> list = itemService.search(title);
+//            model.addAttribute("list", list);
+//        }else {
+//            List<Item> list = itemService.findAll();
+//            model.addAttribute("list", list);}
+//        return "index";
+//    }
 }
