@@ -1,7 +1,6 @@
 package mk.ukim.finki.wp.wpelibrary.web;
 
 import mk.ukim.finki.wp.wpelibrary.model.Author;
-import mk.ukim.finki.wp.wpelibrary.model.Form;
 import mk.ukim.finki.wp.wpelibrary.model.Item;
 import mk.ukim.finki.wp.wpelibrary.service.AuthorService;
 import mk.ukim.finki.wp.wpelibrary.service.ItemService;

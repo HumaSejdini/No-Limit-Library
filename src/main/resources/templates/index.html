@@ -197,9 +197,7 @@
 <!--</html>-->
 
 
-
-
-<th:block xmlns:th="http://www.thymeleaf.org">
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <!-- Header-->
 <header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
@@ -268,6 +266,7 @@
                         <!--                            <i class="fa fa-trash">View-Item</i>-->
                         <!--                        </button>-->
                         <!--                    </form>-->
+                        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                         <form th:action="@{'/item/delete/{id}' (id=${item.getId()})}"
                               th:method="DELETE">
                             <button type="submit"
@@ -275,10 +274,12 @@
                                 <i class="fa fa-trash">Delete</i>
                             </button>
                         </form>
-                        <div><a th:href="@{'/item/edit-form/{id}' (id=${item.getId()})}"
+                        </th:block>
+                        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                        <div ><a th:href="@{'/item/edit-form/{id}' (id=${item.getId()})}"
                                 class="btn btn-sm btn-info edit-item">
                             <i class="fa fa-trash">Edit</i>
-                        </a></div>
+                        </a></div></th:block>
                     </div>
                 </div>
                 <!--            <div class="text-right">-->

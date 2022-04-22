@@ -131,7 +131,7 @@
 <!--<script src="js/scripts.js"></script>-->
 <!--</body>-->
 <!--</html>-->
-<th:block xmlns:th="http://www.thymeleaf.org">
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <!-- Header-->
 <header class="bg-dark py-5">
@@ -165,7 +165,7 @@
                         <tr>
                             <!-- TODO quantity and price  -->
                             <th scope="col">Item name</th>
-                            <th scope="col">Price</th>
+                            <th scope="col">Price in $</th>
                             <th scope="col">Publisher</th>
                             <th scope="col">Quantity</th>
                             <!--                            <th scope="col">Category</th>-->
@@ -176,11 +176,11 @@
                             <td th:text="${item.getTitle()}"></td>
                             <td th:text="${item.getPrice()}"></td>
                             <td th:text="${item.getPublisher() != null}
-                            ? ${item.getPublisher().getName()} : 'No Manufacturer'"></td>
+                            ? ${item.getPublisher().getName()} : 'No Publisher'"></td>
                             <!--                            <td th:text="${item.getCategory().toString().equals(type.toString()) : 'null'}"></td>-->
                             <!--                            <td th:text="${item.getQuantity()}"></td>-->
                             <!--                            <td  th:text="${form.quantity}" ></td>-->
-                            <td  th:text="${itemQ.quantity}" ></td>
+                            <td  th:text="${item.quantity}" ></td>
                             <td ></td>
                         </tr>
                         </tbody>
@@ -189,9 +189,9 @@
             </div>
             <div class="col mb-3">
                 <div class="row">
-                    <div class="col-sm-12 col-md-12" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <div class="col-sm-12 col-md-12">
                         <a href="/item" class="btn btn-block btn-dark add-product-btn">
-                            Add more items
+                            Add more items in shopping cart
                         </a>
                     </div>
                 </div>
@@ -202,4 +202,6 @@
 </div>
 <br>
 <br>
+    <br>
+    <br>
 </th:block>

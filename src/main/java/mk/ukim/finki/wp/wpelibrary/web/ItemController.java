@@ -7,6 +7,7 @@ import mk.ukim.finki.wp.wpelibrary.model.enumerations.Category;
 import mk.ukim.finki.wp.wpelibrary.service.AuthorService;
 import mk.ukim.finki.wp.wpelibrary.service.ItemService;
 import mk.ukim.finki.wp.wpelibrary.service.PublisherService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,7 @@ public class ItemController {
         return "redirect:/item";
     }
     @GetMapping("/add-form")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public  String addItemPage(Model model){
 //        List<Item> items=this.itemService.findAll();
 //        List<Author> authors = this.authorService.listAll();
@@ -60,6 +62,7 @@ public class ItemController {
         return "master-template";
     }
     @GetMapping("/edit-form/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String editItemPage(@PathVariable Long id,Model model){
         if(this.itemService.findById(id).isPresent()){
             Item item = this.itemService.findById(id).get();

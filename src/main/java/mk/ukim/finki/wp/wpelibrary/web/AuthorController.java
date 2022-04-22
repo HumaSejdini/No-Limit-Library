@@ -6,6 +6,7 @@ import mk.ukim.finki.wp.wpelibrary.model.Publisher;
 import mk.ukim.finki.wp.wpelibrary.model.enumerations.Category;
 import mk.ukim.finki.wp.wpelibrary.service.AuthorService;
 import org.springframework.scheduling.support.SimpleTriggerContext;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/author")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AuthorController {
     private final AuthorService authorService;
 
