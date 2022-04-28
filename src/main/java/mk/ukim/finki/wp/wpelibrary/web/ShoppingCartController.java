@@ -27,7 +27,7 @@ public class ShoppingCartController {
             model.addAttribute("hasError",true);
             model.addAttribute("error",error);
         }
-//        User user = (User) req.getSession().getAttribute("user");
+
         String username=(String) req.getRemoteUser();
         ShoppingCart shoppingCart=this.shoppingCartService.getActiveShoppingCart(username);
         model.addAttribute("items",this.shoppingCartService.listAllItemsInShoppingCart(shoppingCart.getId()));
@@ -37,7 +37,7 @@ public class ShoppingCartController {
     @PostMapping("/add-item/{id}")
     public String addProductToShoppingCart(@PathVariable Long id,HttpServletRequest req,Model model,@ModelAttribute("itemQ") Item item){
         try{
-//            User user=(User) req.getSession().getAttribute("user");
+
             String username=req.getRemoteUser();
             ShoppingCart shoppingCart=this.shoppingCartService.addItemToShoppingCart(username, id);
             model.addAttribute("quantity",item.getQuantity());
