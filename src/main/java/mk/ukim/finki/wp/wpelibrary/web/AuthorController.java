@@ -74,14 +74,6 @@ public class AuthorController {
         }
         return "redirect:/author/?error=ItemNotFound";//authronotfound
     }
-//    @PostMapping("/edit-authors/{id}")
-//    public String update(@PathVariable Long id,
-//                         @RequestParam String name,
-//                         @RequestParam String surname,
-//                         @RequestParam String country
-//                         ) { //kto long
-//        this.authorService.update(id,name,surname,country);
-//        return "redirect:/author";
-//    }
+
 
 }
