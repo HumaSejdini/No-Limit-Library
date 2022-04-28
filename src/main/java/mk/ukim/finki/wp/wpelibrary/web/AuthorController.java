@@ -43,40 +43,7 @@ public class AuthorController {
         return "redirect:/author";
     }
 
-    //    @GetMapping("/add-author")
-//    public  String addItemPage(Model model){
-//        List<Author> authors = this.authorService.listAll();
-//        model.addAttribute("authors",authors);
-//        return "add-author";
-//    }
-//    @GetMapping("/edit-author/{id}")
-//    public String editItemPage(@PathVariable Long id,Model model){
-//        if(this.authorService.findById(id).isPresent()){
-//            Author author=this.authorService.findById(id).get();
-//            model.addAttribute("author",author);
-//
-//            return "add-author";
-//        }
-//        return "redirect:/author/?error=ItemNotFound";
-//    }
-//    @PostMapping("/add")//ishte requestmapping
-//    public String saveProduct(@RequestParam String name,
-//                              @RequestParam String surname,
-//                              @RequestParam String country){
-//        //Double price, String title,String description, Integer quantity, String imglink, Category category, Long publisherId
-//        this.authorService.create(name,surname,country);
-//        return "redirect:/author";
-//    }
-//
-//    @PostMapping("/authors/{id}")
-//    public String update(@PathVariable Long id,
-//                         @RequestParam String name,
-//                         @RequestParam String surname,
-//                         @RequestParam String country
-//                         ) { //kto long
-//        this.authorService.update(id,name,surname,country);
-//        return "redirect:/author";
-//    }
+ 
     @GetMapping("/addAuthor")
     public String showCreateForm(Model model) {
         List<Author> authors = this.authorService.listAll();
