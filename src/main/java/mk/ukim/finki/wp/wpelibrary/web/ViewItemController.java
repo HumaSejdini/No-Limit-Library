@@ -36,15 +36,7 @@ public class ViewItemController {
         return "master-template";
     }
 
-    //    @GetMapping("/{id}")
-//    public String getTheSelectedItem(@PathVariable Long id, Model model){
-//        Item item1=this.itemService.findById(id);
-//        List<Author> authors=this.authorService.listAll();
-//        model.addAttribute("item1",item1);
-//        model.addAttribute("authors",authors);
-//        return "view-item.html";
-//    }
-//da imame i edit
+  
     @GetMapping("/{id}")
     public String editProductPage(@PathVariable Long id, Model model) {
         if (this.itemService.findById(id).isPresent()) {
