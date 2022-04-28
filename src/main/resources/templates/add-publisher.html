@@ -1,0 +1,59 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Add another publisher</h1>
+            <p class="lead fw-normal text-white-50 mb-0"></p>
+        </div>
+    </div>
+</header>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <form action="/publisher/add-publisher" method="POST">
+                <input id="id" type="hidden" name="id" th:value="(${publisher} != null ? ${publisher.getId()} : '')">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text"
+                           class="form-control"
+                           id="name"
+                           name="name"
+                           th:value="(${publisher} != null ? ${publisher.getName()} : '')"
+                           required
+                           placeholder="Enter title">
+                </div>
+                <div class="form-group">
+                    <label for="contact">Contact</label>
+                    <input type="text"
+                           class="form-control"
+                           id="contact"
+                           name="contact"
+                           th:value="(${publisher} != null ? ${publisher.getContact()} : '')"
+                           placeholder="Contact">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text"
+                           class="form-control"
+                           id="address"
+                           name="address"
+                           th:value="(${publisher} != null ? ${publisher.getAddress()} : '')"
+                           placeholder="Country">
+                </div>
+
+
+                <button id="submit" type="submit" class="btn btn-dark">Submit</button>
+                <a type="button" class="btn btn-dark" href="/publisher">Back</a>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+
+</th:block>

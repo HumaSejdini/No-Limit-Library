@@ -55,8 +55,11 @@
                 <img th:src="${item.getImglink()}" width="450px" height="300px"  class="card-img-top" alt="...">
                 <div class="text-center">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${item.getTitle()}">Card title</h5>
-                        <p class="card-text" th:each="author:${authors}" th:if="${item.getAuthor().contains(author)}"th:text="${author.getName()}+' '+${author.getSurname()}"></p>
+                        <h4 class="card-title" th:text="${item.getTitle()}">Card title</h4>
+<!--                        <p class="card-text" th:each="author:${authors}" th:if="${item.getAuthor().contains(author)}"th:text="${author.getName()}+' '+${author.getSurname()}"></p>-->
+<!--                        <span class="item-rel" th:each="author:${authors}" th:value="${author.id}" th:text="${author.name}"> [skill.name]</span>-->
+                        <h5 class="card-title" th:each="author:${item.author}"  th:value="${author.id}" th:if="${item.getAuthor().contains(author)}" th:text="${author.getName()}+' '+${author.getSurname()}" > [skill.name]</h5>
+
                         <div  th:text="${item.getPrice()} +'$'">Price</div>
                         <!--                    <a href="/view-item" class="btn btn-primary">View item</a> &lt;!&ndash;ovde bese za add-to-shopCart&ndash;&gt;-->
                         <a  href="/view-item" th:href="@{'/view-item/{id}' (id=${item.getId()})}" th:method="GET" class="btn btn-outline-dark mt-auto">View item</a>

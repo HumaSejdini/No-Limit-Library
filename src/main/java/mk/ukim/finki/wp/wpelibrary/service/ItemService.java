@@ -12,7 +12,7 @@ public interface ItemService {
     Optional<Item> findByTitle(String title);
     List<Item> findAll();
     void deleteById(Long id);
-    Optional<Item> save(Double price, String title,String description, Integer quantity, String imglink, Category category, Long publisherId);
-    Optional<Item> update(Long id,Double price, String title,String description, Integer quantity, String imglink, Category category, Publisher publisher);
+    Optional<Item> save(Double price, String title,String description, Integer quantity, String imglink, Category category, Long publisherId,List<Long> authorId);
+    Optional<Item> update(Long id,Double price, String title,String description, Integer quantity, String imglink, Category category, Long publisherId,List<Long> authorId);
     List<Item> filter(String title);
 }

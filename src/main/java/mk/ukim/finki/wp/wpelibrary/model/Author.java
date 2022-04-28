@@ -2,10 +2,8 @@ package mk.ukim.finki.wp.wpelibrary.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,6 +20,9 @@ public class Author {
         this.surname = surname;
         this.country = country;
     }
+
+//    @ManyToMany(mappedBy = "author")
+//    private List<Item> items;
 
     public Author() {
     }

@@ -1,0 +1,64 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">All publishers listed</h1>
+            <!--            <p class="lead fw-normal text-white-50 mb-0">You are at the best e-library</p>-->
+        </div>
+    </div>
+</header>
+<div th:if="${hasError}">
+    <h5 class="text-center text-danger" th:text="${error}"></h5>
+</div>
+<div class="container my-2">
+    <div class="card">
+        <div class="card-body">
+            <div th:switch="${publishers}" class="container my-5">
+
+                <div class="col-md-12">
+                    <h2 th:case="null">No record found !!</h2>
+                    <div th:case="*">
+                        <table class="table table-striped table-responsive-md">
+                            <thead>
+                            <tr>
+                                <th>Publisher Name</th>
+                                <th>Publisher contact</th>
+                                <th>Publisher address</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="publisher:${publishers}">
+                                <td th:text="${publisher.name}"></td>
+                                <td th:text="${publisher.contact}"></td>
+                                <td th:text="${publisher.address}"></td>
+                                <td><div><a th:href="@{'/publisher/edit-publisher/{id}' (id=${publisher.getId()})}"
+                                            class="btn btn-sm btn-info edit-item">
+                                    <i class="fa fa-trash">Edit</i>
+                                </a></div>
+                                </td>
+
+                                <td><form th:action="@{'/publisher/delete/{id}' (id=${publisher.getId()})}"
+                                          th:method="DELETE">
+                                    <button type="submit"
+                                            class="btn btn-sm btn-danger delete-item">
+                                        <i class="fa fa-trash">Delete</i>
+                                    </button>
+                                </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p class="my-5">
+                    <a href="/publisher/addPublisher" class="btn btn-dark">
+                        <i class="fas fa-user-plus ml-2">  Add Publisher </i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</th:block>

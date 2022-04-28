@@ -58,10 +58,10 @@ public class ItemController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public  String addItemPage(Model model){
 //        List<Item> items=this.itemService.findAll();
-//        List<Author> authors = this.authorService.listAll();
+        List<Author> authors = this.authorService.listAll();
         List<Publisher> publishers=this.publisherService.findAll();
         List<Category> categories = Arrays.asList(Category.values());
-//        model.addAttribute("authors",authors);
+        model.addAttribute("authors",authors);
         model.addAttribute("publishers",publishers);
         model.addAttribute("categories",categories);
         model.addAttribute("bodyContent","proba-add-item");
@@ -73,10 +73,10 @@ public class ItemController {
     public String editItemPage(@PathVariable Long id,Model model){
         if(this.itemService.findById(id).isPresent()){
             Item item = this.itemService.findById(id).get();
-//            List<Author> authors = this.authorService.listAll();
+            List<Author> authors = this.authorService.listAll();
             List<Publisher> publishers=this.publisherService.findAll();
             List<Category> categories = Arrays.asList(Category.values());
-//            model.addAttribute("authors",authors);
+            model.addAttribute("authors",authors);
             model.addAttribute("publishers",publishers);
             model.addAttribute("categories",categories);
             model.addAttribute("item",item);
@@ -87,38 +87,20 @@ public class ItemController {
 
 
     @PostMapping("/add")//ishte requestmapping
-    public String saveProduct(@RequestParam Double price,
+    public String saveProduct(@RequestParam(required = false) Long id,
+                              @RequestParam Double price,
                               @RequestParam String title,
                               @RequestParam String description,
                               @RequestParam Integer quantity,
                               @RequestParam String imglink,
                               @RequestParam Category category,
-                              @RequestParam Long publisherId){
+                              @RequestParam Long publisherId,
+                              @RequestParam List<Long> authorId){
         //Double price, String title,String description, Integer quantity, String imglink, Category category, Long publisherId
-        this.itemService.save(price,title,description,quantity,imglink,category,publisherId);
+        if(id!=null){
+            this.itemService.update(id,price,title,description,quantity,imglink,category,publisherId,authorId);
+        }
+        this.itemService.save(price,title,description,quantity,imglink,category,publisherId,authorId);
         return "redirect:/item";
     }
-
-    @PostMapping("/items/{id}")
-    public String update(@PathVariable Long id,
-                         @RequestParam Double price,
-                         @RequestParam String title,
-                         @RequestParam String description,
-                         @RequestParam Integer quantity,
-                         @RequestParam String imglink,
-                         @RequestParam Category category,
-                         @RequestParam Publisher publisherId) { //kto long
-        this.itemService.update(id, price,title,description,quantity,imglink,category,publisherId);
-        return "redirect:/item";
-    }
-//    @GetMapping("/search")
-//    public String home(Item item, Model model, String title) {
-//        if(title!=null) {
-//            List<Item> list = itemService.search(title);
-//            model.addAttribute("list", list);
-//        }else {
-//            List<Item> list = itemService.findAll();
-//            model.addAttribute("list", list);}
-//        return "index";
-//    }
 }

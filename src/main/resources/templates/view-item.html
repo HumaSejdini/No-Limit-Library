@@ -6,7 +6,7 @@
         <div class="row gx-4 gx-lg-5 align-items-center" th:each="item,current:${items}" >
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0 " width="127px" height="600px" th:src="${item.getImglink()}" alt="..." /></div>
             <div class="col-md-6">
-                <div class="small mb-1">SKU: BST-498</div>
+<!--                <div class="small mb-1">SKU: BST-498</div>-->
                 <h1 class="display-5 fw-bolder"  th:text="${item.getTitle()}"></h1>
                 <h2 class="display-5 fw-bolder"  th:each="author:${authors}" th:if="${item.getAuthor().contains(author)}" th:text="${author.getName()}+' '+${author.getSurname()}">Shop item template</h2>
                 <div class="fs-5 mb-5">
@@ -33,9 +33,11 @@
                     <!--                            </div>-->
                     <!--                            </form>-->
                     <!--                            <input class="form-control text-center me-3" id="quantity" type="number" value="1"  min="1" th:max="${item.getQuantity()}" style="max-width: 5rem"  />-->
+                    <input class="form-control text-center me-3" id="quantity" type="number" value="1"  min="1" th:max="${item.getQuantity()}" style="max-width: 5rem"  />
+
                     <form th:action="@{'/shopping-cart/add-item/{id}' (id=${item.getId()})}"
                           th:method="POST" modelAttribute="itemQ">
-                        <input class="form-control text-center me-3" id="quantity" type="number" value="1"  min="1" th:max="${item.getQuantity()}" style="max-width: 5rem"  />
+<!--                        <input class="form-control text-center me-3" id="quantity" type="number" value="1"  min="1" th:max="${item.getQuantity()}" style="max-width: 5rem"  />-->
 
                         <button type="submit"
                                 class="btn btn-sm btn-dark cart-product">
@@ -60,7 +62,9 @@
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Product name-->
-                            <h5 class="fw-bolder" th:text="${item.getTitle()}">Fancy Product</h5>
+                            <h4 class="fw-bolder" th:text="${item.getTitle()}">Fancy Product</h4>
+                            <h5 class="fw-bolder"  th:each="author:${authors}" th:if="${item.getAuthor().contains(author)}" th:text="${author.getName()}+' '+${author.getSurname()}">Shop item template</h5>
+
                             <!-- Product price-->
                             <div th:text="${item.getPrice()} +'$'">$40.00 - $80.00</div>
                         </div>
