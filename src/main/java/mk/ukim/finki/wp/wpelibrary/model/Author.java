@@ -21,8 +21,6 @@ public class Author {
         this.country = country;
     }
 
-//    @ManyToMany(mappedBy = "author")
-//    private List<Item> items;
 
     public Author() {
     }
