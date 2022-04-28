@@ -96,7 +96,7 @@ public class ItemController {
                               @RequestParam Category category,
                               @RequestParam Long publisherId,
                               @RequestParam List<Long> authorId){
-        //Double price, String title,String description, Integer quantity, String imglink, Category category, Long publisherId
+      
         if(id!=null){
             this.itemService.update(id,price,title,description,quantity,imglink,category,publisherId,authorId);
         }
