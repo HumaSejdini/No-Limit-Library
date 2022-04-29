@@ -25,8 +25,8 @@
                                 <th>Author Name</th>
                                 <th>Author Surname</th>
                                 <th>Country</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th sec:authorize="hasRole('ROLE_ADMIN')">Edit</th>
+                                <th sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -34,13 +34,13 @@
                                 <td th:text="${author.name}"></td>
                                 <td th:text="${author.surname}"></td>
                                 <td th:text="${author.country}"></td>
-                                <td><div><a th:href="@{'/author/edit-author/{id}' (id=${author.getId()})}"
+                                <td><div sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{'/author/edit-author/{id}' (id=${author.getId()})}"
                                             class="btn btn-sm btn-info edit-item">
                                     <i class="fa fa-trash">Edit</i>
                                 </a></div>
                                 </td>
 
-                                <td><form th:action="@{'/author/delete/{id}' (id=${author.getId()})}"
+                                <td><form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{'/author/delete/{id}' (id=${author.getId()})}"
                                           th:method="DELETE">
                                     <button type="submit"
                                             class="btn btn-sm btn-danger delete-item">
@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <p class="my-5">
-                    <a href="/author/addAuthor" class="btn btn-dark">
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/author/addAuthor" class="btn btn-dark">
                         <i class="fas fa-user-plus ml-2">  Add Authors </i></a>
                 </p>
             </div>
