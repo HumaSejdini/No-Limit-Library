@@ -16,7 +16,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/author")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AuthorController {
     private final AuthorService authorService;
 
