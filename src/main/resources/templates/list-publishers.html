@@ -25,8 +25,8 @@
                                 <th>Publisher Name</th>
                                 <th>Publisher contact</th>
                                 <th>Publisher address</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th sec:authorize="hasRole('ROLE_ADMIN')">Edit</th>
+                                <th sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -34,13 +34,13 @@
                                 <td th:text="${publisher.name}"></td>
                                 <td th:text="${publisher.contact}"></td>
                                 <td th:text="${publisher.address}"></td>
-                                <td><div><a th:href="@{'/publisher/edit-publisher/{id}' (id=${publisher.getId()})}"
+                                <td><div sec:authorize="hasRole('ROLE_ADMIN')" ><a th:href="@{'/publisher/edit-publisher/{id}' (id=${publisher.getId()})}"
                                             class="btn btn-sm btn-info edit-item">
                                     <i class="fa fa-trash">Edit</i>
                                 </a></div>
                                 </td>
 
-                                <td><form th:action="@{'/publisher/delete/{id}' (id=${publisher.getId()})}"
+                                <td><form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{'/publisher/delete/{id}' (id=${publisher.getId()})}"
                                           th:method="DELETE">
                                     <button type="submit"
                                             class="btn btn-sm btn-danger delete-item">
@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <p class="my-5">
-                    <a href="/publisher/addPublisher" class="btn btn-dark">
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/publisher/addPublisher" class="btn btn-dark">
                         <i class="fas fa-user-plus ml-2">  Add Publisher </i></a>
                 </p>
             </div>
